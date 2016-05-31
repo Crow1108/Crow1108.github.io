@@ -4,18 +4,17 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>iOS上传图片，PHP做为服务器 | CrowZhang</title>
+  <title>Archives: 2016/4 | CrowZhang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="iOS开发中经常会碰到上传图片的情况，在上传前，先将图片转换成NSData类型，然后利用Post请求，直接将图片放在上传参数即可。代码如下：">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS上传图片，PHP做为服务器">
-<meta property="og:url" content="http://www.zhuangzhuangli.xyz/2016/05/31/iOS上传图片，PHP做为服务器/index.html">
+  <meta name="description" content="还是一只菜鸟">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CrowZhang">
+<meta property="og:url" content="http://www.zhuangzhuangli.xyz/archives/2016/04/index.html">
 <meta property="og:site_name" content="CrowZhang">
-<meta property="og:description" content="iOS开发中经常会碰到上传图片的情况，在上传前，先将图片转换成NSData类型，然后利用Post请求，直接将图片放在上传参数即可。代码如下：">
-<meta property="og:updated_time" content="2016-05-31T03:35:06.000Z">
+<meta property="og:description" content="还是一只菜鸟">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS上传图片，PHP做为服务器">
-<meta name="twitter:description" content="iOS开发中经常会碰到上传图片的情况，在上传前，先将图片转换成NSData类型，然后利用Post请求，直接将图片放在上传参数即可。代码如下：">
+<meta name="twitter:title" content="CrowZhang">
+<meta name="twitter:description" content="还是一只菜鸟">
   
     <link rel="alternative" href="/atom.xml" title="CrowZhang" type="application/atom+xml">
   
@@ -172,105 +171,53 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-iOS上传图片，PHP做为服务器" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2016/05/31/iOS上传图片，PHP做为服务器/" class="article-date">
-  	<time datetime="2016-05-31T03:12:05.000Z" itemprop="datePublished">2016-05-31</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/04/19/iOS上传图片，PHP做为服务器/" class="archive-article-date">
+  	<time datetime="2016-04-19T03:12:05.000Z" itemprop="datePublished">4月 19</time>
 </a>
-    </div>
+        </div>
+    	 
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      iOS上传图片，PHP做为服务器
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/04/19/iOS上传图片，PHP做为服务器/">iOS上传图片，PHP做为服务器</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
 	</div>
 
-        
+          
 
+        </div>
         <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>iOS开发中经常会碰到上传图片的情况，在上传前，先将图片转换成NSData类型，然后利用Post请求，直接将图片放在上传参数即可。<br>代码如下：<br><a id="more"></a></p>
-<pre><code>NSData *data = UIImageJPEGRepresentation(self.reasonPic.image, 0.3);
-NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:data,@&quot;pic&quot;,str,@&quot;name&quot; ,nil];
-AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@&quot;application/json&quot;,@&quot;text/json&quot;, @&quot;text/plain&quot;, @&quot;text/html&quot;, nil];
-manager.securityPolicy.allowInvalidCertificates = YES;
-[manager POST:@&quot;http://api.zhangchunlin.me/updata.php&quot; parameters:dic constructingBodyWithBlock:^(id&lt;AFMultipartFormData&gt;  _Nonnull formData) {
-} progress:^(NSProgress * _Nonnull uploadProgress) {
-
-} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-    if ([[responseObject objectForKey:@&quot;result&quot;] isEqual:[NSNumber numberWithInteger:1]]) {
-        self.picURL = [responseObject objectForKey:@&quot;url&quot;];
-    }
-    NSLog(@&quot;%@&quot;, self.picURL);   
-} failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-    NSLog(@&quot;%@&quot;,error);
-}];    
-</code></pre>
-      
-    </div>
-    
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2016/01/04/第一篇/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">第一篇</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
-
-<div class="share_jia">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">分享到: &nbsp; </span>
-		<a class="jiathis_button_facebook"></a> 
-    <a class="jiathis_button_twitter"></a>
-    <a class="jiathis_button_plus"></a> 
-    <a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
-
-
-
-
-
-
-
+    
 
 </div>
       <footer id="footer">
@@ -296,8 +243,8 @@ manager.securityPolicy.allowInvalidCertificates = YES;
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false

@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://www.zhuangzhuangli.xyz/2016/04/19/iOS上传图片，PHP做为服务器/index.html">
 <meta property="og:site_name" content="CrowZhang">
 <meta property="og:description" content="iOS开发中经常会碰到上传图片的情况，在上传前，先将图片转换成NSData类型，然后利用Post请求，直接将图片放在上传参数即可。代码如下：">
-<meta property="og:updated_time" content="2016-05-31T05:45:55.000Z">
+<meta property="og:updated_time" content="2016-05-31T06:00:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS上传图片，PHP做为服务器">
 <meta name="twitter:description" content="iOS开发中经常会碰到上传图片的情况，在上传前，先将图片转换成NSData类型，然后利用Post请求，直接将图片放在上传参数即可。代码如下：">
@@ -226,6 +226,24 @@ manager.securityPolicy.allowInvalidCertificates = YES;
 } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
     NSLog(@&quot;%@&quot;,error);
 }];    
+</code></pre><p>服务器端，由于PHP是我自学的，当时也是踩了不少坑。当时还遇到过要把NSData类型的16进制转化成2进制，再写入文件的。但是这个方法并不好使。其实直接把接收到的NSData写入指定路径即可。<br>代码如下：</p>
+<pre><code>&lt;?php
+$name = $_POST[&apos;name&apos;];
+$newFilePath=&quot;pic/$name.jpg&quot;; //这里如果不是放在本目录下的话，就得给相应的文件夹打开权限，要不无法保存成功
+$data = $_POST[&apos;pic&apos;];
+if(empty($data)){ //判断是否为空
+ $code = array(&apos;result&apos;=&gt;0, &apos;url&apos;=&gt;&apos;error&apos;);
+  $data=file_get_contents($newFilePath);
+}  else
+{
+      $code = array(&apos;result&apos;=&gt;1, &apos;url&apos;=&gt;$newFilePath);
+}
+$newFile = fopen($newFilePath,&quot;w&quot;);
+fwrite($newFile,$data);
+fclose($newFile);
+$json=json_encode($code);
+echo $json;  //这里我是将上传后的图片路径返回给客户端
+?&gt;
 </code></pre>
       
     </div>

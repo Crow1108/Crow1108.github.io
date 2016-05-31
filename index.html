@@ -199,7 +199,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>iOS开发中经常会碰到上传图片的情况，在上传前，先将图片转换成NSData类型，然后利用Post请求，直接将图片放在上传参数即可。<br>代码如下：</p>
+<pre><code>`NSData *data = UIImageJPEGRepresentation(self.reasonPic.image, 0.3);
+NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:data,@&quot;pic&quot;,str,@&quot;name&quot; ,nil];
+AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@&quot;application/json&quot;,@&quot;text/json&quot;, @&quot;text/plain&quot;, @&quot;text/html&quot;, nil];
+manager.securityPolicy.allowInvalidCertificates = YES;
+[manager POST:@&quot;http://api.zhangchunlin.me/updata.php&quot; parameters:dic constructingBodyWithBlock:^(id&lt;AFMultipartFormData&gt;  _Nonnull formData) {
+} progress:^(NSProgress * _Nonnull uploadProgress) {
+
+} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    if ([[responseObject objectForKey:@&quot;result&quot;] isEqual:[NSNumber numberWithInteger:1]]) {
+        self.picURL = [responseObject objectForKey:@&quot;url&quot;];
+    }
+    NSLog(@&quot;%@&quot;, self.picURL);   
+} failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    NSLog(@&quot;%@&quot;,error);
+}];    
+`
+</code></pre>
       
     </div>
     

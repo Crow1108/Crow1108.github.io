@@ -6,16 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>iOS上传图片，PHP做为服务器 | CrowZhang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="还是一只菜鸟">
+  <meta name="description" content="iOS开发中经常会碰到上传图片的情况，在上传前，先将图片转换成NSData类型，然后利用Post请求，直接将图片放在上传参数即可。代码如下：
+`NSData *data = UIImageJPEGRepresentation(self.reasonPic.image, 0.3);
+NSMutableDictionary *dic = [NSMutableDictionary dictionaryW">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS上传图片，PHP做为服务器">
 <meta property="og:url" content="http://www.zhuangzhuangli.xyz/2016/05/31/iOS上传图片，PHP做为服务器/index.html">
 <meta property="og:site_name" content="CrowZhang">
-<meta property="og:description" content="还是一只菜鸟">
-<meta property="og:updated_time" content="2016-05-31T03:19:25.000Z">
+<meta property="og:description" content="iOS开发中经常会碰到上传图片的情况，在上传前，先将图片转换成NSData类型，然后利用Post请求，直接将图片放在上传参数即可。代码如下：
+`NSData *data = UIImageJPEGRepresentation(self.reasonPic.image, 0.3);
+NSMutableDictionary *dic = [NSMutableDictionary dictionaryW">
+<meta property="og:updated_time" content="2016-05-31T03:32:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS上传图片，PHP做为服务器">
-<meta name="twitter:description" content="还是一只菜鸟">
+<meta name="twitter:description" content="iOS开发中经常会碰到上传图片的情况，在上传前，先将图片转换成NSData类型，然后利用Post请求，直接将图片放在上传参数即可。代码如下：
+`NSData *data = UIImageJPEGRepresentation(self.reasonPic.image, 0.3);
+NSMutableDictionary *dic = [NSMutableDictionary dictionaryW">
   
     <link rel="alternative" href="/atom.xml" title="CrowZhang" type="application/atom+xml">
   
@@ -209,7 +215,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>iOS开发中经常会碰到上传图片的情况，在上传前，先将图片转换成NSData类型，然后利用Post请求，直接将图片放在上传参数即可。<br>代码如下：</p>
+<pre><code>`NSData *data = UIImageJPEGRepresentation(self.reasonPic.image, 0.3);
+NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:data,@&quot;pic&quot;,str,@&quot;name&quot; ,nil];
+AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@&quot;application/json&quot;,@&quot;text/json&quot;, @&quot;text/plain&quot;, @&quot;text/html&quot;, nil];
+manager.securityPolicy.allowInvalidCertificates = YES;
+[manager POST:@&quot;http://api.zhangchunlin.me/updata.php&quot; parameters:dic constructingBodyWithBlock:^(id&lt;AFMultipartFormData&gt;  _Nonnull formData) {
+} progress:^(NSProgress * _Nonnull uploadProgress) {
+
+} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    if ([[responseObject objectForKey:@&quot;result&quot;] isEqual:[NSNumber numberWithInteger:1]]) {
+        self.picURL = [responseObject objectForKey:@&quot;url&quot;];
+    }
+    NSLog(@&quot;%@&quot;, self.picURL);   
+} failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    NSLog(@&quot;%@&quot;,error);
+}];    
+`
+</code></pre>
       
     </div>
     
@@ -251,26 +275,6 @@
 
 
 
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="iOS上传图片，PHP做为服务器" data-title="iOS上传图片，PHP做为服务器" data-url="http://www.zhuangzhuangli.xyz/2016/05/31/iOS上传图片，PHP做为服务器/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
 
 
 
